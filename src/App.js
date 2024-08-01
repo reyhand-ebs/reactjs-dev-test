@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import SearchForm from "./components/SearchForm";
 import MovieList from "./components/MovieList";
@@ -19,12 +19,15 @@ function App() {
     });
   };
 
-  const selectLanguage = ({ id, en }) => {
-    if (id === undefined || en === undefined) {
-      return "language options is empty";
-    }
-    return locale === "id" ? id : en;
-  };
+  const selectLanguage = useCallback(
+    ({ id, en }) => {
+      if (id === undefined || en === undefined) {
+        return "language options is empty";
+      }
+      return locale === "id" ? id : en;
+    },
+    [locale]
+  );
 
   const localeContextValue = useMemo(() => {
     return {
@@ -32,7 +35,7 @@ function App() {
       toggleLocale,
       selectLanguage,
     };
-  }, [locale]);
+  }, [locale, selectLanguage]);
 
   const handleSearch = (searchResults) => {
     setMovies(searchResults);

@@ -76,7 +76,7 @@ const MovieContent = styled.div`
 const MovieCard = ({ movie }) => {
   return (
     <MovieCardContainer>
-      {movie.Poster == "N/A" ? 
+      {movie.Poster === "N/A" ? 
       (
         <img src="./default-image.png" alt={movie.Title} />
       ) : (
